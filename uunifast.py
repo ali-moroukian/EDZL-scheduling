@@ -2,6 +2,7 @@ import random
 
 
 def uunifast(n, u):
+    tries = 0
     while True:
         utilizations = []
         sumU = u
@@ -13,3 +14,7 @@ def uunifast(n, u):
 
         if all(ut <= 1 for ut in utilizations):
             return utilizations
+
+        tries += 1
+        if tries % 1000 == 0:
+            print('UUnifast failed after 1000 tries!')
