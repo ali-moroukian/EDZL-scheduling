@@ -75,7 +75,6 @@ def select_jobs_for_edzl(ready_queue, time):
 
 
 def run_jobs_with_load_balancing(jobs, cores):
-    # TODO: load balancing
     for i, core in enumerate(sorted(cores, key=lambda c: c.utilization)):
         if len(jobs) <= i:
             core.tasks.append(None)
@@ -180,3 +179,6 @@ if __name__ == '__main__':
     json_result = create_json(core_set)
     print(json_result)
     visualize(json_result)
+
+    for core in core_set:
+        print(core.utilization)
