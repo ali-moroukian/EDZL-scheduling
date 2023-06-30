@@ -1,5 +1,7 @@
 import random
 
+from config import bcolors
+
 
 def uunifast(n, u):
     tries = 0
@@ -17,4 +19,4 @@ def uunifast(n, u):
 
         tries += 1
         if tries % 1000 == 0:
-            print('UUnifast failed after 1000 tries!')
+            print(f'{bcolors.WARNING}UUnifast failed after 1000 tries!{bcolors.ENDC}')

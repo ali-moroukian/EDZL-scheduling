@@ -24,8 +24,6 @@ def run_edzl(tasks, cores):
 
         for job in jobs:
             if job.deadline == time and not job.finished:
-                for c in cores:
-                    print(c)
                 raise FailedScheduleException(time, job)
 
 
