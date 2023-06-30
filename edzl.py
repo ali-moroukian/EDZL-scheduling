@@ -1,5 +1,6 @@
 from config import M
 from models import Job
+from utils.failed_schedule_exception import FailedScheduleException
 
 
 def run_edzl(tasks, cores):
@@ -25,8 +26,7 @@ def run_edzl(tasks, cores):
             if job.deadline == time and not job.finished:
                 for c in cores:
                     print(c)
-                # TODO: Report failure in scheduling
-                raise Exception()
+                raise FailedScheduleException(time, job)
 
 
 def select_jobs_for_edzl(ready_queue, time):
@@ -38,8 +38,7 @@ def select_jobs_for_edzl(ready_queue, time):
         if job.laxity - time <= 0:
             selected_jobs.append(job)
     if len(selected_jobs) > M:
-        # TODO: Report failure in scheduling
-        raise Exception()
+        raise FailedScheduleException(time, selected_jobs[-1])
     for job in ready_queue:
         if len(selected_jobs) < M and job not in selected_jobs:
             selected_jobs.append(job)
