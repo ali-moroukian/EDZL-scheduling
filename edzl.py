@@ -43,7 +43,7 @@ def select_jobs_for_edzl(ready_queue, time):
     for job in ready_queue:
         if len(selected_jobs) < M and job not in selected_jobs:
             selected_jobs.append(job)
-        else:
+        elif len(selected_jobs) == M:
             return selected_jobs
 
 
