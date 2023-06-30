@@ -41,7 +41,7 @@ def select_jobs_for_edzl(ready_queue, time):
         # TODO: Report failure in scheduling
         raise Exception()
     for job in ready_queue:
-        if len(selected_jobs) < M:
+        if len(selected_jobs) < M and job not in selected_jobs:
             selected_jobs.append(job)
         else:
             return selected_jobs
