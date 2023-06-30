@@ -10,7 +10,7 @@ class Task:
 
     @property
     def computation_time(self):
-        return math.ceil(self.period * self.utilization)
+        return round(self.period * self.utilization, 1) or 0.1
 
     def __str__(self):
         return f'{self.period} {self.computation_time}'
