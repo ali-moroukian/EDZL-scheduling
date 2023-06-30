@@ -47,7 +47,8 @@ def select_jobs_for_edzl(M, ready_queue, time):
 
 
 def select_jobs_for_gedf(M, ready_queue, time):
-    pass
+    ready_queue = sorted(ready_queue, key=lambda j: j.deadline)
+    return ready_queue[:M]
 
 
 def run_jobs_with_load_balancing(jobs, cores):

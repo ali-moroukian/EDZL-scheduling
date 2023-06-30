@@ -11,7 +11,9 @@ from utils.uunifast import uunifast
 
 if __name__ == '__main__':
     M = random.choice(MS)
-    utilizations = uunifast(N, random.random() * M)
+    utilization = random.random() * M
+    utilizations = uunifast(N, utilization)
+    print(f'{bcolors.OKCYAN}Utilization: {utilization}{bcolors.ENDC}')
     tasks = []
     print(f'{bcolors.HEADER}{N} Tasks:{bcolors.ENDC}')
     for k in range(N):
