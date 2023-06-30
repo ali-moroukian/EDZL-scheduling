@@ -1,10 +1,12 @@
-from config import M
+from config import Algorithm
 from models import Job
 from utils.failed_schedule_exception import FailedScheduleException
 
 
-def run_edzl(tasks, cores):
+def run_algorithm(algorithm, tasks, cores):
     jobs, hyper_period = Job.generate_jobs_for_one_hyper_period(tasks)
+
+    select_function = select_jobs_for_edzl if algorithm == Algorithm.EDZL else select_jobs_for_gedf
 
     ready_queue = set()
     for time in range(hyper_period):
@@ -14,7 +16,7 @@ def run_edzl(tasks, cores):
             elif job.start > time:
                 break
 
-        selected_jobs = select_jobs_for_edzl(ready_queue, time)
+        selected_jobs = select_function(len(cores), ready_queue, time)
 
         run_jobs_with_load_balancing(selected_jobs, cores)
 
@@ -27,7 +29,7 @@ def run_edzl(tasks, cores):
                 raise FailedScheduleException(time, job)
 
 
-def select_jobs_for_edzl(ready_queue, time):
+def select_jobs_for_edzl(M, ready_queue, time):
     ready_queue = sorted(ready_queue, key=lambda j: j.deadline)
     if len(ready_queue) <= M:
         return ready_queue
@@ -42,6 +44,10 @@ def select_jobs_for_edzl(ready_queue, time):
             selected_jobs.append(job)
         elif len(selected_jobs) == M:
             return selected_jobs
+
+
+def select_jobs_for_gedf(M, ready_queue, time):
+    pass
 
 
 def run_jobs_with_load_balancing(jobs, cores):

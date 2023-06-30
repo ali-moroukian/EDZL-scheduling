@@ -1,5 +1,7 @@
+import random
+
 from config import *
-from edzl import run_edzl
+from algorithm import run_algorithm
 from models import Task, Core
 from reports.report import get_schedule_result
 from reports.report_file import write_on_file
@@ -8,6 +10,7 @@ from utils.failed_schedule_exception import FailedScheduleException
 from utils.uunifast import uunifast
 
 if __name__ == '__main__':
+    M = random.choice(MS)
     utilizations = uunifast(N, random.random() * M)
     tasks = []
     print(f'{bcolors.HEADER}{N} Tasks:{bcolors.ENDC}')
@@ -20,7 +23,7 @@ if __name__ == '__main__':
         cores.append(Core(k))
 
     try:
-        run_edzl(tasks, cores)
+        run_algorithm(Algorithm.EDZL, tasks, cores)
         result = get_schedule_result(cores)
         print(f'{bcolors.HEADER}Result:{bcolors.ENDC}')
         print(result)

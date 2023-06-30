@@ -1,7 +1,7 @@
-import random
+from enum import Enum
 
 N = 10  # No. of Tasks
-M = random.choice([4, 8, 16])  # No. of Cores
+MS = [4, 8, 16]  # No. of Cores
 
 PERIODS = [10, 20, 100]
 
@@ -37,3 +37,8 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+
+class Algorithm(Enum):
+    EDZL = 'edzl'
+    GEDF = 'gedf'
