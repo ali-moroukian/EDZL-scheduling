@@ -1,33 +1,24 @@
 import random
 
-from algorithm.selection import select_jobs_for_edzl, select_jobs_for_gedf
-from algorithm.assignments import run_jobs_with_load_balancing, run_jobs_with_less_context_switch, run_jobs_with_less_context_switch_and_load_balance
+from algorithm.algorithm import run_algorithm, get_tasks_and_cores
+from algorithm.assignments import *
+from algorithm.selection import *
 from config import *
-from algorithm.algorithm import run_algorithm
-from models import Task, Core
 from reports.report import get_schedule_result
 from reports.report_file import write_on_file
 from reports.visualization import visualize
 from utils.failed_schedule_exception import FailedScheduleException
-from utils.uunifast import uunifast
-from iteround import saferound
-
 
 if __name__ == '__main__':
     M = random.choice(MS)
     utilization = U or random.random() * M
-    utilizations = uunifast(N, utilization)
-    utilizations = saferound(utilizations, places=2)
     print(f'{bcolors.OKCYAN}Utilization: {utilization}{bcolors.ENDC}')
-    tasks = []
+    tasks, cores = get_tasks_and_cores(M, N, utilization)
     print(f'{bcolors.HEADER}{N} Tasks:{bcolors.ENDC}')
-    for k in range(N):
-        tasks.append(Task(k, random.choice(PERIODS), utilizations[k]))
+    for task in tasks:
+        print(f'Task {task.id}', f'T={task.period}', f'C={task.computation_time}')
 
-    cores = []
     print(f'{bcolors.OKCYAN}{M} Cores{bcolors.ENDC}')
-    for k in range(M):
-        cores.append(Core(k))
 
     try:
         run_algorithm(select_jobs_for_edzl, run_jobs_with_less_context_switch_and_load_balance, tasks, cores)

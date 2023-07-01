@@ -1,7 +1,32 @@
-import numpy
+import random
 
-from models import Job
+import numpy
+from iteround import saferound
+
+from config import PERIODS
+from models import Job, Task, Core
 from utils.failed_schedule_exception import FailedScheduleException
+from utils.uunifast import uunifast
+
+
+def get_tasks(N, utilizations):
+    tasks = []
+    for k in range(N):
+        tasks.append(Task(k, random.choice(PERIODS), utilizations[k]))
+    return tasks
+
+
+def get_cores(M):
+    cores = []
+    for k in range(M):
+        cores.append(Core(k))
+    return cores
+
+
+def get_tasks_and_cores(M, N, U):
+    utilizations = uunifast(N, U)
+    utilizations = saferound(utilizations, places=2)
+    return get_tasks(N, utilizations), get_cores(M)
 
 
 def run_algorithm(select_function, assign_function, tasks, cores):

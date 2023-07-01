@@ -6,7 +6,6 @@ class Task:
         self.id = id_
         self.period = period
         self.utilization = utilization
-        print(f'Task {self.id}', f'T={self.period}', f'C={self.computation_time}')
 
     @property
     def computation_time(self):
