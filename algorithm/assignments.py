@@ -4,7 +4,7 @@ def run_jobs_with_load_balancing(jobs, cores):
             core.jobs.append(None)
             continue
         core.jobs.append(jobs[i])
-        jobs[i].computed_time += 1
+        jobs[i].computed_time = round(jobs[i].computed_time + 0.1, 1)
         jobs[i].last_core = core
 
 
@@ -20,7 +20,7 @@ def run_jobs_with_less_context_switch(jobs, cores):
             core = cores[core_index]
             core_index += 1
         core.jobs.append(job)
-        job.computed_time += 1
+        job.computed_time = round(job.computed_time + 0.1, 1)
         job.last_core = core
         cores_usued.append(core)
 
