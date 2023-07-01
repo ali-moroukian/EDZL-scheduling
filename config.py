@@ -3,6 +3,8 @@ from enum import Enum
 N = 10  # No. of Tasks
 MS = [4, 8, 16]  # No. of Cores
 
+U = None # Utilization
+
 PERIODS = [10, 20, 100]
 
 REPORT_FILE_NAME = 'report.json'

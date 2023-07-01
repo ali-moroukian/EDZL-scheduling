@@ -12,7 +12,7 @@ from iteround import saferound
 
 if __name__ == '__main__':
     M = random.choice(MS)
-    utilization = random.random() * M
+    utilization = U or random.random() * M
     utilizations = uunifast(N, utilization)
     utilizations = saferound(utilizations, places=2)
     print(f'{bcolors.OKCYAN}Utilization: {utilization}{bcolors.ENDC}')
