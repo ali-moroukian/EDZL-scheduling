@@ -21,7 +21,6 @@ class Job:
         self.start = s
         self.deadline = d
         self.computation = c
-        self.finish = None
         self.computed_time = 0
         self.last_core = None
 

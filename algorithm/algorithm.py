@@ -9,9 +9,9 @@ from utils.failed_schedule_exception import FailedScheduleException
 from utils.uunifast import uunifast
 
 
-def get_tasks(N, utilizations):
+def get_tasks(utilizations):
     tasks = []
-    for k in range(N):
+    for k in range(len(utilizations)):
         tasks.append(Task(k, random.choice(PERIODS), utilizations[k]))
     return tasks
 
@@ -26,7 +26,7 @@ def get_cores(M):
 def get_tasks_and_cores(M, N, U):
     utilizations = uunifast(N, U)
     utilizations = saferound(utilizations, places=2)
-    return get_tasks(N, utilizations), get_cores(M)
+    return get_tasks(utilizations), get_cores(M)
 
 
 def run_algorithm(select_function, assign_function, tasks, cores):

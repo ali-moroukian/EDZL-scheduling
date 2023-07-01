@@ -1,7 +1,7 @@
 N = 10  # No. of Tasks
 MS = [4, 8, 16]  # No. of Cores
 
-U = None # Utilization
+U = None  # Utilization
 
 PERIODS = [10, 20, 100]
 
