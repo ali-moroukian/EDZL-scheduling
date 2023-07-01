@@ -10,9 +10,11 @@ from utils.failed_schedule_exception import FailedScheduleException
 from utils.uunifast import uunifast
 from iteround import saferound
 
+
 if __name__ == '__main__':
     M = random.choice(MS)
     utilization = U or random.random() * M
+    algorithm = Algorithm.EDZL
     utilizations = uunifast(N, utilization)
     utilizations = saferound(utilizations, places=2)
     print(f'{bcolors.OKCYAN}Utilization: {utilization}{bcolors.ENDC}')
@@ -27,7 +29,7 @@ if __name__ == '__main__':
         cores.append(Core(k))
 
     try:
-        run_algorithm(Algorithm.EDZL, tasks, cores)
+        run_algorithm(algorithm, tasks, cores)
         result = get_schedule_result(cores)
         print(f'{bcolors.HEADER}Result:{bcolors.ENDC}')
         print(result)

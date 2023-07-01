@@ -24,6 +24,7 @@ class Job:
         self.computation = c
         self.finish = None
         self.computed_time = 0
+        self.last_core = None
 
     @property
     def laxity(self):
