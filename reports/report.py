@@ -6,7 +6,7 @@ def get_schedule_result(cores):
     for core in cores:
         for i, job in enumerate(core.jobs):
             if job:
-                result[job.id].append([i, i + 1, core.id])
+                result[job.id].append([i / 10, round(i / 10 + 0.1, 1), core.id])
     for job, run_times in result.items():
         merged_result = []
         s, f, core_id = run_times[0]
