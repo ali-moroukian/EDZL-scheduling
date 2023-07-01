@@ -1,3 +1,4 @@
-def draw_chart(result, file_name):
+def draw_chart(edzl_result, gedf_result, file_name):
     print(file_name)
-    print(result)
+    print(edzl_result)
+    print(gedf_result)
