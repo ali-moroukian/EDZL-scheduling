@@ -8,12 +8,12 @@ def run_jobs_with_load_balancing(jobs, cores):
         jobs[i].last_core = core
 
 
-def run_jobs_with_less_context_switch(jobs, cores):
+def run_jobs_with_less_context_switch(jobs, cores, load_balance=False):
     cores = list(sorted(cores, key=lambda c: c.utilization))
     core_index = 0
     cores_usued = []
     for job in jobs:
-        if job.last_core and job.last_core not in cores_usued:
+        if job.last_core and job.last_core not in cores_usued and (not load_balance or job.last_core.jobs[-1] == job):
             core = job.last_core
         else:
             while cores[core_index] in cores_usued:
@@ -28,3 +28,7 @@ def run_jobs_with_less_context_switch(jobs, cores):
     for core in cores:
         if core not in cores_usued:
             core.jobs.append(None)
+
+
+def run_jobs_with_less_context_switch_and_load_balance(jobs, cores):
+    run_jobs_with_less_context_switch(jobs, cores, True)

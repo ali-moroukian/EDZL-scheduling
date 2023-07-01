@@ -1,7 +1,7 @@
 import random
 
 from algorithm.selection import select_jobs_for_edzl, select_jobs_for_gedf
-from algorithm.assignments import run_jobs_with_load_balancing, run_jobs_with_less_context_switch
+from algorithm.assignments import run_jobs_with_load_balancing, run_jobs_with_less_context_switch, run_jobs_with_less_context_switch_and_load_balance
 from config import *
 from algorithm.algorithm import run_algorithm
 from models import Task, Core
@@ -30,7 +30,7 @@ if __name__ == '__main__':
         cores.append(Core(k))
 
     try:
-        run_algorithm(select_jobs_for_edzl, run_jobs_with_less_context_switch, tasks, cores)
+        run_algorithm(select_jobs_for_edzl, run_jobs_with_less_context_switch_and_load_balance, tasks, cores)
         result = get_schedule_result(cores)
         print(f'{bcolors.HEADER}Result:{bcolors.ENDC}')
         print(result)
