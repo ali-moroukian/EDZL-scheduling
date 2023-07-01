@@ -1,7 +1,9 @@
 import random
 
+from algorithm.selection import select_jobs_for_edzl, select_jobs_for_gedf
+from algorithm.assignments import run_jobs_with_load_balancing, run_jobs_with_less_context_switch
 from config import *
-from algorithm import run_algorithm
+from algorithm.algorithm import run_algorithm
 from models import Task, Core
 from reports.report import get_schedule_result
 from reports.report_file import write_on_file
@@ -14,7 +16,6 @@ from iteround import saferound
 if __name__ == '__main__':
     M = random.choice(MS)
     utilization = U or random.random() * M
-    algorithm = Algorithm.EDZL
     utilizations = uunifast(N, utilization)
     utilizations = saferound(utilizations, places=2)
     print(f'{bcolors.OKCYAN}Utilization: {utilization}{bcolors.ENDC}')
@@ -29,7 +30,7 @@ if __name__ == '__main__':
         cores.append(Core(k))
 
     try:
-        run_algorithm(algorithm, tasks, cores)
+        run_algorithm(select_jobs_for_edzl, run_jobs_with_load_balancing, tasks, cores)
         result = get_schedule_result(cores)
         print(f'{bcolors.HEADER}Result:{bcolors.ENDC}')
         print(result)
