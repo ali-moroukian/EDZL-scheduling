@@ -9,6 +9,7 @@ def run_jobs_with_load_balancing(jobs, cores):
 
 
 def run_jobs_with_less_context_switch(jobs, cores):
+    cores = list(sorted(cores, key=lambda c: c.utilization))
     core_index = 0
     cores_usued = []
     for job in jobs:

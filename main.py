@@ -30,7 +30,7 @@ if __name__ == '__main__':
         cores.append(Core(k))
 
     try:
-        run_algorithm(select_jobs_for_edzl, run_jobs_with_load_balancing, tasks, cores)
+        run_algorithm(select_jobs_for_edzl, run_jobs_with_less_context_switch, tasks, cores)
         result = get_schedule_result(cores)
         print(f'{bcolors.HEADER}Result:{bcolors.ENDC}')
         print(result)
