@@ -32,4 +32,4 @@ if __name__ == '__main__':
     for M in MS:
         edzl_result = run_schedulability(M, select_jobs_for_edzl)
         gedf_result = run_schedulability(M, select_jobs_for_gedf)
-        draw_chart(edzl_result, gedf_result, f'{M}_chart.jpg')
+        draw_chart(edzl_result, gedf_result, f'{M}_chart')

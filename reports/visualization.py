@@ -21,4 +21,5 @@ def visualize(json_object):
 
     plt.xlabel('Time')
     plt.ylabel('Job')
+    plt.savefig('visulization.png')
     plt.show()
